@@ -10,9 +10,9 @@ import UIKit
 import RxSwift
 class VariablesRxViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -68,6 +68,7 @@ class VariablesRxViewController: UIViewController {
         print("Before subscription ---")
         let currCount=subscriptionCount
         _ = variable.asObservable()
+            .debounce(2, scheduler: MainScheduler.instance)
                 .subscribe(onNext: { n in
                     print("\(currCount)onNext: \(n)")
                 }, onCompleted: {
